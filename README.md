@@ -1,4 +1,4 @@
-This repository contains machine-translated versions of the Magical Language Lyrical Lisp text data from https://github.com/zick/Magical-Language-Lyrical-Lisp. Some strings were translated using GPT-4o, and some using Google Translate due errors in GPT-4o's output, then some manual cleanup was done. This is not meant to be a definitive translation, but a rough starting point and a work in progress.
+This repository contains machine-translated English versions of the Magical Language Lyrical Lisp text data from https://github.com/zick/Magical-Language-Lyrical-Lisp. Some strings were translated using GPT-4o, and some using Google Translate due errors in GPT-4o's output, then some manual cleanup was done. This is not meant to be a definitive translation, but a rough starting point and a work in progress.
 
 ## How to run Lyrical Lisp
 
