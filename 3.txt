@@ -86,9 +86,6 @@ textclear
   mov %adv_additional, 1
   return
 
-
-
-
 *free_mode
   gosub *destroy_title
   print 1
@@ -96,28 +93,28 @@ textclear
 bgm ms_ex
   mov %adv_bgm, 1
   mov %adv_tmp, 0
-  mov %save_flag, 0  ;ƒZ[ƒu•s”\
+  mov %save_flag, 0  ;Cannot save
   csp SP_R : csp SP_L
   r_show ari_n
   mov %adv_char, 1    ;=arisa
 
-  ;;ƒQ[ƒ€isó‹µ‚ğ“Ç‚İ‚Ş
+;;Load game progress
   csvopen "arisa.szk", "rc"
   csvread %adv_clear
   csvclose
 
-  ;;Lisp‘¤‚Ì€”õ
+;;Lisp Side preparation
   mov %adv_rmode, 0
   if %adv_additional == 0 gosub *set_additional_func
-  gosub *create_new_env  ;©—R‚É‚¢‚¶‚ê‚é‚æ‚¤‚ÉV‚µ‚¢ŠÂ‹«‚ğì‚é
+  gosub *create_new_env  ; Create a new environment that can be freely modified
   mov %arg0, %ret
   mov %toplevel_env, %arg0
-  gosub *push  ;GC‘Îô
+  gosub *push  ; GC countermeasure
   mov %arg1, %global_env
   gosub *nconc
   mov %eval_limit, 0
 *fm01
-  mov %gc_run, 0  ;GC‹N“®‰ñ”‚ğ‰Šú‰»
+  mov %gc_run, 0  ; Initialize the number of GC activations
   mov %current_proc, %nil
   mov %current_env, %toplevel_env
   mov %adv_error, 0
@@ -152,7 +149,7 @@ repaint
   gosub *pop
   mov %eval_limit, DEFAULT_EVAL_LIMIT
   saveon
-  mov %save_flag, 1  ;ƒZ[ƒu‰Â”\
+  mov %save_flag, 1  ;Save possible
   textclear
   gosub *fm01_say_goodbye
 stop
@@ -160,11 +157,9 @@ stop
   print E_FAST
   goto *title
 
-
 *fm01_menu
-if %adv_clear == 0 csel "–ß‚é", *fm01, "‚a‚f‚l@‚n‚m^‚n‚e‚e", *fm01_menu_bgm, "—§‚¿ŠG@‚n‚m^‚n‚e‚e", *fm01_menu_char, "I—¹", *fm01_end
-csel "–ß‚é", *fm01, "‚a‚f‚l@‚n‚m^‚n‚e‚e", *fm01_menu_bgm, "—§‚¿ŠG", *fm01_menu_char_change, "I—¹", *fm01_end
-
+if %adv_clear == 0 csel "Return", *fm01, "BGM ON/OFF", *fm01_menu_bgm, "Character Portrait ON/OFF", *fm01_menu_char, "Exit", *fm01_end
+csel "Return", *fm01, "BGM ON/OFF", *fm01_menu_bgm, "Character Portrait", *fm01_menu_char_change, "Exit", *fm01_end
 
 *fm01_menu_bgm
   if %adv_bgm == 1 mov %adv_bgm, 0 : stop : goto *fm01
@@ -179,13 +174,10 @@ bgm ms_ex
   goto *fm01
 
 *fm01_menu_char_change
-if %adv_clear <= 3 csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_char_suzuka
-if %adv_clear <= 8 csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_char_suzuka, "L“‡", *fm01_char_samejima, "‹óŠÇ—‹Ç‹Çˆõ‚`", *fm01_char_jiku
-if %adv_clear <= 11 csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_char_suzuka, "L“‡", *fm01_char_samejima, "‹óŠÇ—‹Ç‹Çˆõ‚`", *fm01_char_jiku, "‹óŠÇ—‹Ç‹Çˆõ‚a", *fm01_char_jiku2
-csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_char_suzuka, "L“‡", *fm01_char_samejima, "‹óŠÇ—‹Ç‹Çˆõ‚`", *fm01_char_jiku, "‹óŠÇ—‹Ç‹Çˆõ‚a", *fm01_char_jiku2, "‚È‚Ì‚Í", *fm01_char_nanoha
-
-
-
+if %adv_clear <= 3 csel "No Character Image", *fm01_char_non, "Arisa", *fm01_char_arisa, "Suzuka", *fm01_char_suzuka
+if %adv_clear <= 8 csel "No Character Image", *fm01_char_non, "Arisa", *fm01_char_arisa, "Suzuka", *fm01_char_suzuka, "Samejima", *fm01_char_samejima, "Dimensional Administration Bureau Staff A", *fm01_char_jiku
+if %adv_clear <= 11 csel "No Character Image", *fm01_char_non, "Arisa", *fm01_char_arisa, "Suzuka", *fm01_char_suzuka, "Samejima", *fm01_char_samejima, "Dimensional Administration Bureau Staff A", *fm01_char_jiku, "Dimensional Administration Bureau Staff B", *fm01_char_jiku2
+csel "No Character Image", *fm01_char_non, "Arisa", *fm01_char_arisa, "Suzuka", *fm01_char_suzuka, "Samejima", *fm01_char_samejima, "Dimensional Administration Bureau Staff A", *fm01_char_jiku, "Dimensional Administration Bureau Staff B", *fm01_char_jiku2, "Nanoha", *fm01_char_nanoha
 
 *fm01_char_non
   mov %adv_char, 0
@@ -196,69 +188,68 @@ csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_c
 *fm01_char_arisa
   mov %adv_char, 1
   r_show ari_n
-ƒAƒŠƒTu‚³‚ A‚â‚é‚í‚æIv\
+Arisa "Alright, let's do this!"\
   goto *fm01
 
 *fm01_char_suzuka
   mov %adv_char, 2
   r_show suzur_nc
-‚·‚¸‚©uŠæ’£‚ë‚¤‚Ëv\
+Suzuka: Let's do our best, okay"\
   goto *fm01
 
 *fm01_char_samejima
   mov %adv_char, 3
   r_show ":l;img/same.bmp"
-L“‡u‚¨ŒÄ‚Ñ‚Å‚µ‚å‚¤‚©Hv\
+Samejima: Did you call for me?"\
   goto *fm01
 
 *fm01_char_jiku
   mov %adv_char, 4
   r_show ":l;img/jiku.bmp"
-‹Çˆõu‚ÍI@‚¨ŒÄ‚Ñ‚Å‚µ‚å‚¤‚©v\
+Officer: Yes! You called for me?"\
   goto *fm01
 
 *fm01_char_jiku2
   mov %adv_char, 5
   r_show ":l;img/jiku2.bmp"
-‹Çˆõu‚ [A‚ß‚ñ‚Ç‚­‚³ccv\
+Bureau Staff "Ah, what a pain..."
   goto *fm01
 
 *fm01_char_nanoha
   mov %adv_char, 6
   r_show ":l;img/nano.bmp"
-‚È‚Ì‚Íu‚È‚Ì‚ÁIv\
+Nanoha: "Nano!"\
   goto *fm01
 
-
 *fm01_say_goodbye
-  if %adv_char == 0 puttext "‚¨”æ‚ê—l‚Å‚µ‚½\"
-  if %adv_char == 1 puttext "ƒAƒŠƒTu‚¨‚Â‚©‚ê‚³‚Üv\"
-  if %adv_char == 2 puttext "‚·‚¸‚©u‚Î‚¢‚Î`‚¢v\"
-  if %adv_char == 3 puttext "L“‡u‚ ‚è‚ª‚Æ‚¤‚²‚´‚¢‚Ü‚µ‚½v\"
-  if %adv_char == 4 puttext "‹Çˆõu—¹‰ğ‚µ‚Ü‚µ‚½Iv\"
-  if %adv_char == 5 puttext "‹Çˆõu‚Ğ‚ÁA‚Ğ‚¡‚¡‚¡[[[Iv\"
-  if %adv_char == 6 puttext "‚È‚Ì‚Íu‚¨‚í‚è‚È‚Ìv\"
+  if %adv_char == 0 puttext "Good work!\"
+  if %adv_char == 1 puttext "Arisa: 'Good job!'\"  
+  if %adv_char == 2 puttext "Suzuka: 'Bye-bye!'\"  
+  if %adv_char == 3 puttext "Samejima: 'Thank you very much!'\"  
+  if %adv_char == 4 puttext "Officer: 'Understood!'\"  
+  if %adv_char == 5 puttext "Officer: 'H-Heeeeelp!'\"  
+  if %adv_char == 6 puttext "Nanoha: 'It's over.'\"  
   mov %adv_rmode, 1
   return
 
 *fm01_say_tab
-  if %adv_char == 0 puttext "‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚Ü‚·"
-  if %adv_char == 1 puttext "ƒAƒŠƒTu‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚é‚í‚æv"
-  if %adv_char == 2 puttext "‚·‚¸‚©u‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚é‚æv"
-  if %adv_char == 3 puttext "L“‡u‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚Ü‚·v"
-  if %adv_char == 4 puttext "‹Çˆõu‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚Ü‚·Iv"
-  if %adv_char == 5 puttext "‹Çˆõu‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚é‚¼Iv"
-  if %adv_char == 6 puttext "‚È‚Ì‚Íu‚s‚‚‚ƒL[‚Åƒƒjƒ…[‚ªŠJ‚¯‚é‚Ìv"
+  if %adv_char == 0 puttext "You can open the menu with the Tab key"
+  if %adv_char == 1 puttext "Arisa: \"You can open the menu with the Tab key\""
+  if %adv_char == 2 puttext "Suzuka: \"You can open the menu with the Tab key\""
+  if %adv_char == 3 puttext "Samejima: \"You can open the menu with the Tab key\""
+  if %adv_char == 4 puttext "Officer: \"You can open the menu with the Tab key!\""
+  if %adv_char == 5 puttext "Officer: \"You can open the menu with the Tab key!\""
+  if %adv_char == 6 puttext "Nanoha: \"You can open the menu with the Tab key\""
   return
 
 *fm01_say_calc
-  if %adv_char == 0 puttext "!s0ŒvZ’†cc!sd"
-  if %adv_char == 1 puttext "!s0ƒAƒŠƒTuŒvZ’†ccv!sd"
-  if %adv_char == 2 puttext "!s0‚·‚¸‚©uŒvZ’†‚¾‚æccv!sd"
-  if %adv_char == 3 puttext "!s0L“‡uŒvZ’†‚Å‚·ccv!sd"
-  if %adv_char == 4 puttext "!s0‹ÇˆõuŒvZ’†‚Å‚·Iv!sd"
-  if %adv_char == 5 puttext "!s0‹ÇˆõuŒvZ’†‚¾Iv!sd"
-  if %adv_char == 6 puttext "!s0‚È‚Ì‚ÍuŒvZ’†‚È‚Ìv!sd"
+  if %adv_char == 0 puttext "!s0Calculatingï¿½cï¿½c!sd"
+  if %adv_char == 1 puttext "!s0Arisa 'Calculatingï¿½cï¿½c'!sd"
+  if %adv_char == 2 puttext "!s0Suzuka 'Calculatingï¿½cï¿½c'!sd"
+  if %adv_char == 3 puttext "!s0Samejima 'Calculatingï¿½cï¿½c'!sd"
+  if %adv_char == 4 puttext "!s0Officer 'Calculating!'!sd"
+  if %adv_char == 5 puttext "!s0Officer 'Calculating!'!sd"
+  if %adv_char == 6 puttext "!s0Nanoha 'Calculating.'!sd"
   return
 
 *fm01_say_result
@@ -272,90 +263,88 @@ csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_c
 
 *fm01_say_result0
   if %adv_error == 1 goto *fm01_say_result0_error
-w$sretx@
+ï¿½w$sretï¿½x@
   return
 *fm01_say_result0_error
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result1
   if %adv_error == 1 goto *fm01_say_result1_error
-ƒAƒŠƒTuŒ‹‰Ê‚Íw$sretx‚Ëv@
+Alisa "The result is '$sret'"@
   return
 *fm01_say_result1_error
-ƒAƒŠƒTuƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚ ‚é‚ív
+Alisa "There's a mistake in the program"
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result2
   if %adv_error == 1 goto *fm01_say_result2_error
-‚·‚¸‚©uŒ‹‰Ê‚Íw$sretx‚¾‚æv@
+Suzuka "The result is '$sret'"@
   return
 *fm01_say_result2_error
-‚·‚¸‚©uƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚ ‚é‚æv
+Suzuka "There's a mistake in the program"
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result3
   if %adv_error == 1 goto *fm01_say_result3_error
-L“‡uŒ‹‰Ê‚Íw$sretx‚Å‚²‚´‚¢‚Ü‚·v@
+Samejima "The result is '$sret'"@
   return
 *fm01_say_result3_error
-L“‡uƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚²‚´‚¢‚Ü‚·v
+Samejima "There's a mistake in the program"
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result4
   if %adv_error == 1 goto *fm01_say_result4_error
-‹ÇˆõuŒ‹‰Ê‚Íw$sretx‚Å‚·Iv@
+Staff "The result is '$sret'!"@
   return
 *fm01_say_result4_error
-‹ÇˆõuƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚ ‚è‚Ü‚·Iv
+Staff "There's a mistake in the program!"
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result5
   if %adv_error == 1 goto *fm01_say_result5_error
-‹ÇˆõuŒ‹‰Ê‚Íw$sretx‚¾Iv@
+Staff "The result is '$sret'!"@
   return
 *fm01_say_result5_error
-‹ÇˆõuƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚ ‚é‚¼Iv
+Staff "There's a mistake in the program!"
 #33FF33$sret#FFFFFF@
   return
 *fm01_say_result6
   if %adv_error == 1 goto *fm01_say_result6_error
-‚È‚Ì‚ÍuŒ‹‰Ê‚Íw$sretx‚È‚Ìv@
+Nanoha "The result is '$sret'"@
   return
 *fm01_say_result6_error
-‚È‚Ì‚ÍuƒvƒƒOƒ‰ƒ€‚ÉŒë‚è‚ª‚ ‚é‚Ìv
+Nanoha "There's a mistake in the program"
 #33FF33$sret#FFFFFF@
   return
 
 *fm01_say_parenthesis_error
   textclear
-  if %adv_char == 0 puttext "Š‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚Ü‚¹‚ñ\"
+  if %adv_char == 0 puttext "The number of opening parentheses and closing parentheses do not match\"
   if %adv_char == 1 goto *fm01_say_parenthesis_error_arisa
   if %adv_char == 2 goto *fm01_say_parenthesis_error_suzuka
-  if %adv_char == 3 puttext "L“‡uŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¨‚è‚Ü‚¹‚ñv\"
-  if %adv_char == 4 puttext "‹ÇˆõuŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚Ü‚¹‚ñIv\"
-  if %adv_char == 5 puttext "‹ÇˆõuŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚È‚¢Iv\"
-  if %adv_char == 6 puttext "‚È‚Ì‚ÍuŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚È‚¢‚Ìv\"
+  if %adv_char == 3 puttext "Samejima: 'The number of opening parentheses and closing parentheses do not match'\"
+  if %adv_char == 4 puttext "Officer: 'The number of opening parentheses and closing parentheses do not match!'\"
+  if %adv_char == 5 puttext "Officer: 'The number of opening parentheses and closing parentheses do not match!'\"
+  if %adv_char == 6 puttext "Nanoha: 'The number of opening parentheses and closing parentheses do not match'\"
   return
-
 
 *fm01_say_parenthesis_error_arisa
   r_show ari_die
-ƒAƒŠƒTuŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚È‚¢‚í‚æv\
+Arisa: The number of opening and closing parentheses doesn't match.
   r_show ari_n
   return
 
 *fm01_say_parenthesis_error_suzuka
   r_show suzur_ase
-‚·‚¸‚©uŠ‡ŒÊ‚ÌŠJ‚­”‚ÆA•Â‚¶‚é”‚ªˆê’v‚µ‚Ä‚¢‚È‚¢‚æv\
+Suzuka: The number of opening parentheses and closing parentheses do not match."\
   r_show suzur_n
   return
-
 
 ;;;*lisp_test_eval($form, $description)
 *lisp_test_eval
 !s0$sarg1!sd
-!s0‚“‚F%sp!sd
-!s0‚“‚“‚F%ssp!sd
+!s0ï¿½ï¿½ï¿½ï¿½ï¿½F%sp!sd
+!s0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½F%ssp!sd
   len %arg0, $sarg0
   gosub *push         ; S(length)
   gosub *spush        ; SS(form)
@@ -365,267 +354,267 @@ csel "—§‚¿ŠG‚È‚µ", *fm01_char_non, "ƒAƒŠƒT", *fm01_char_arisa, "‚·‚¸‚©", *fm01_c
   gosub *eval_form
   mov %arg0, %ret     ; %arg0 = result
   if %ret == %sharp_f goto *lisp_test_eval_fail
-!s0y#00FF00‚‚‚“‚“#FFFFFFz!sd
+!s0ï¿½y#00FF00pass#FFFFFFï¿½z!sd
 *lisp_test_eval_stack_check
   gosub *spop         ; form < SS()
   len %tmp, $sret
   gosub *pop          ; length < S()
-!s0‚“‚F%sp!sd
-!s0‚“‚“‚F%ssp!sd
+!s0ï¿½ï¿½ï¿½ï¿½ï¿½F%sp!sd
+!s0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½F%ssp!sd
   if %tmp != %ret gosub *lisp_test_eval_stack_error
   textclear
   return
 *lisp_test_eval_fail
-!s0y#FF0000‚†‚‚‰‚Œ#FFFFFFz!sd@
+!s0ï¿½y#FF0000fail#FFFFFFï¿½z!sd@
   goto *lisp_test_eval_stack_check
 *lisp_test_eval_stack_error
-!s0#FF0000III‚“‚”‚‚ƒ‚‹@‚—‚‚“@‚‚‚’‚‚‹‚…‚III#FFFFFF!sd@
+!s0#FF0000ï¿½Iï¿½Iï¿½Istack was brokenï¿½Iï¿½Iï¿½I#FFFFFF!sd@
   return
 
 *lisp_test_start
   ;; Basic tests
   mov $sarg0, "(eq? 'test 'test)"
-  mov $sarg1, "‚…‚‘H"
+  mov $sarg1, "eq?"
   gosub *lisp_test_eval
   mov $sarg0, "(= 1 1)"
-  mov $sarg1, ""
+  mov $sarg1, "="
   gosub *lisp_test_eval
   mov $sarg0, "(not #f)"
-  mov $sarg1, "‚‚‚”"
+  mov $sarg1, "not"
   gosub *lisp_test_eval
 
-  ;; Type tests
+;; Type tests
   mov $sarg0, "(boolean? #t)"
-  mov $sarg1, "‚‚‚‚‚Œ‚…‚‚H@”‚P"
+  mov $sarg1, "boolean? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (boolean? '()))"
-  mov $sarg1, "‚‚‚‚‚Œ‚…‚‚H@”‚Q"
+  mov $sarg1, "boolean? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(symbol? 'test)"
-  mov $sarg1, "‚“‚™‚‚‚‚‚ŒH@”‚P"
+  mov $sarg1, "symbol? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (symbol? 1))"
-  mov $sarg1, "‚“‚™‚‚‚‚‚ŒH@”‚Q"
+  mov $sarg1, "symbol? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(number? 1)"
-  mov $sarg1, "‚‚•‚‚‚‚…‚’H@”‚P"
+  mov $sarg1, "number? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (number? 'test))"
-  mov $sarg1, "‚‚•‚‚‚‚…‚’H@”‚Q"
+  mov $sarg1, "number? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(pair? (cons 1 2))"
-  mov $sarg1, "‚‚‚‰‚’H@”‚P"
+  mov $sarg1, "pair? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (pair? '()))"
-  mov $sarg1, "‚‚‚‰‚’H@”‚Q"
+  mov $sarg1, "pair? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(procedure? car)"
-  mov $sarg1, "‚‚’‚‚ƒ‚…‚„‚•‚’‚…H@”‚P"
+  mov $sarg1, "procedure? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (procedure? 'car))"
-  mov $sarg1, "‚‚’‚‚ƒ‚…‚„‚•‚’‚…H@”‚Q"
+  mov $sarg1, "procedure? #2"
   gosub *lisp_test_eval
 
-  ;; Numeric tests
+;; Numeric tests
   mov $sarg0, "(= (+ 1 2 3) (+ 1 (+ 2 3)))"
-  mov $sarg1, "{"
+  mov $sarg1, "+"
   gosub *lisp_test_eval
   mov $sarg0, "(= (- 1 100) -99)"
-  mov $sarg1, "|"
+  mov $sarg1, "-"
   gosub *lisp_test_eval
   mov $sarg0, "(= (* 2 3 4) (* (* 2 3) 4))"
-  mov $sarg1, "–"
+  mov $sarg1, "*"
   gosub *lisp_test_eval
   mov $sarg0, "(= (/ 99 33) 3)"
-  mov $sarg1, "^"
+  mov $sarg1, "/"
   gosub *lisp_test_eval
   mov $sarg0, "(= (mod 13 7) 6)"
-  mov $sarg1, "‚‚‚„"
+  mov $sarg1, "mod"
   gosub *lisp_test_eval
   mov $sarg0, "(< 99 100)"
-  mov $sarg1, "ƒ@”‚P"
+  mov $sarg1, "< #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (< 100 100))"
-  mov $sarg1, "ƒ@”‚Q"
+  mov $sarg1, "< #2"
   gosub *lisp_test_eval
   mov $sarg0, "(<= 99 100)"
-  mov $sarg1, "ƒ@”‚P"
+  mov $sarg1, "<= #1"
   gosub *lisp_test_eval
   mov $sarg0, "(<= 100 100)"
-  mov $sarg1, "ƒ@”‚Q"
+  mov $sarg1, "<= #2"
   gosub *lisp_test_eval
   mov $sarg0, "(not (<= 101 100))"
-  mov $sarg1, "ƒ@”‚R"
+  mov $sarg1, "<= #3"
   gosub *lisp_test_eval
   mov $sarg0, "(> 100 99)"
-  mov $sarg1, "„@”‚P"
+  mov $sarg1, "> #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (> 100 100))"
-  mov $sarg1, "„@”‚Q"
+  mov $sarg1, "> #2"
   gosub *lisp_test_eval
   mov $sarg0, "(not (>= 99 100))"
-  mov $sarg1, "„@”‚P"
+  mov $sarg1, ">= #1"
   gosub *lisp_test_eval
   mov $sarg0, "(>= 100 100)"
-  mov $sarg1, "„@”‚Q"
+  mov $sarg1, ">= #2"
   gosub *lisp_test_eval
   mov $sarg0, "(>= 101 100)"
-  mov $sarg1, "„@”‚R"
+  mov $sarg1, ">= #3"
   gosub *lisp_test_eval
 
-  ;; List tests
+;; List tests
   mov $sarg0, "(null? '())"
-  mov $sarg1, "‚‚•‚Œ‚ŒH@”‚P"
+  mov $sarg1, "null? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (null? #f))"
-  mov $sarg1, "‚‚•‚Œ‚ŒH@”‚Q"
+  mov $sarg1, "null? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(list? '())"
-  mov $sarg1, "‚Œ‚‰‚“‚”H@”‚P"
+  mov $sarg1, "list? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (list? (cons 1 2)))"
-  mov $sarg1, "‚Œ‚‰‚“‚”H@”‚Q"
+  mov $sarg1, "list? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(list? (cons 'a '()))"
-  mov $sarg1, "‚Œ‚‰‚“‚”H@”‚R"
+  mov $sarg1, "list? #3"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? '() '())"
-  mov $sarg1, "‚…‚‘‚•‚‚ŒH@”‚P"
+  mov $sarg1, "equal? #1"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (cons 1 2) (cons 1 2))"
-  mov $sarg1, "‚…‚‘‚•‚‚ŒH@”‚Q"
+  mov $sarg1, "equal? #2"
   gosub *lisp_test_eval
   mov $sarg0, "(not (equal? (cons 1 2) (cons 3 4)))"
-  mov $sarg1, "‚…‚‘‚•‚‚ŒH@”‚R"
+  mov $sarg1, "equal? #3"
   gosub *lisp_test_eval
   mov $sarg0, "(eq? (car (cons 'a 'b)) 'a)"
-  mov $sarg1, "‚ƒ‚‚’"
+  mov $sarg1, "car"
   gosub *lisp_test_eval
   mov $sarg0, "(eq? (cdr (cons 'a 'b)) 'b)"
-  mov $sarg1, "‚ƒ‚„‚’"
+  mov $sarg1, "cdr"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (list 1 2) (cons 1 (cons 2 '())))"
-  mov $sarg1, "‚Œ‚‰‚“‚”"
+  mov $sarg1, "list"
   gosub *lisp_test_eval
   mov $sarg0, "(= (length '(a b c)) 3)"
-  mov $sarg1, "‚Œ‚…‚‚‡‚”‚ˆ"
+  mov $sarg1, "length"
   gosub *lisp_test_eval
   mov $sarg0, "(eq? (list-ref '(a b c) 1) 'b)"
-  mov $sarg1, "‚Œ‚‰‚“‚”|‚’‚…‚†"
+  mov $sarg1, "list-ref"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (list-tail '(a b c) 1) '(b c))"
-  mov $sarg1, "‚Œ‚‰‚“‚”|‚”‚‚‰‚Œ"
+  mov $sarg1, "list-tail"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (append '(a) '(b c)) '(a b c))"
-  mov $sarg1, "‚‚‚‚…‚‚„"
+  mov $sarg1, "append"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (assoc 'c '((a b) (c d))) '(c d))"
-  mov $sarg1, "‚‚“‚“‚‚ƒ"
+  mov $sarg1, "assoc"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (member 'b '(a b c)) '(b c))"
-  mov $sarg1, "‚‚…‚‚‚‚…‚’"
+  mov $sarg1, "member"
   gosub *lisp_test_eval
   mov $sarg0, "(equal? (map list '(a b c)) '((a) (b) (c)))"
-  mov $sarg1, "‚‚‚"
+  mov $sarg1, "map"
   gosub *lisp_test_eval
 
-  ;; Special form tests
+;; Special form tests
   mov $sarg0, "(= (begin 1 2 3) 3)"
-  mov $sarg1, "‚‚‚…‚‡‚‰‚"
+  mov $sarg1, "begin"
   gosub *lisp_test_eval
   mov $sarg0, "(and)"
-  mov $sarg1, "‚‚‚„@”‚P"
+  mov $sarg1, "and #1"
   gosub *lisp_test_eval
   mov $sarg0, "(and 1 2)"
-  mov $sarg1, "‚‚‚„@”‚Q"
+  mov $sarg1, "and #2"
   gosub *lisp_test_eval
   mov $sarg0, "(not (and 1 2 #f))"
-  mov $sarg1, "‚‚‚„@”‚R"
+  mov $sarg1, "and #3"
   gosub *lisp_test_eval
   mov $sarg0, "(not (or))"
-  mov $sarg1, "‚‚’@”‚P"
+  mov $sarg1, "or #1"
   gosub *lisp_test_eval
   mov $sarg0, "(not (or  #f))"
-  mov $sarg1, "‚‚’@”‚Q"
+  mov $sarg1, "or #2"
   gosub *lisp_test_eval
   mov $sarg0, "(or #f 1 2))"
-  mov $sarg1, "‚‚’@”‚R"
+  mov $sarg1, "or #3"
   gosub *lisp_test_eval
   mov $sarg0, "(= (if '() 1 2) 1)"
-  mov $sarg1, "‚‰‚†@”‚P"
+  mov $sarg1, "if #1"
   gosub *lisp_test_eval
   mov $sarg0, "(= (if #f 1 2) 2)"
-  mov $sarg1, "‚‰‚†@”‚Q"
+  mov $sarg1, "if #2"
   gosub *lisp_test_eval
   mov $sarg0, "(= (cond (#t 1 2) (else 3 4)) 2)"
-  mov $sarg1, "‚ƒ‚‚‚„@”‚P"
+  mov $sarg1, "cond #1"
   gosub *lisp_test_eval
   mov $sarg0, "(= (cond (#f 1 2) (else 3 4)) 4)"
-  mov $sarg1, "‚ƒ‚‚‚„@”‚Q"
+  mov $sarg1, "cond #2"
   gosub *lisp_test_eval
   mov $sarg0, "(= ((lambda (x y) (+ x y)) 1 2) 3)"
-  mov $sarg1, "‚Œ‚‚‚‚‚„‚"
+  mov $sarg1, "lambda"
   gosub *lisp_test_eval
   mov $sarg0, "(= ((let ((x 1)(y 2)) (let ((x 3) (y x)) (+ x y))) 4)"
-  mov $sarg1, "‚Œ‚…‚”"
+  mov $sarg1, "let"
   gosub *lisp_test_eval
   mov $sarg0, "(= ((let ((x 1)(y 2)) (let* ((x 3) (y x)) (+ x y))) 6)"
-  mov $sarg1, "‚Œ‚…‚”–"
+  mov $sarg1, "let*"
   gosub *lisp_test_eval
   mov $sarg0, "(= (letrec ((fact (lambda (x)(if (= x 0) 1 (* x (fact (- x 1))))))) (fact 5)) 120)"
-  mov $sarg1, "‚Œ‚…‚”‚’‚…‚ƒ"
+  mov $sarg1, "letrec"
   gosub *lisp_test_eval
 
-  ;; Definition and mutation tests
+;; Definition and mutation tests
   mov $sarg0, "(define _x 1)"
-  mov $sarg1, "‚„‚…‚†‚‰‚‚…@”‚P"
+  mov $sarg1, "define #1"
   gosub *lisp_test_eval
   mov $sarg0, "(= _x 1)"
-  mov $sarg1, "‚„‚…‚†‚‰‚‚…@”‚Q"
+  mov $sarg1, "define #2"
   gosub *lisp_test_eval
   mov $sarg0, "(= (begin (set! _x 99) _x) 99)"
-  mov $sarg1, "‚“‚…‚”I@‚‡‚Œ‚‚‚‚‚Œ"
+  mov $sarg1, "set! global"
   gosub *lisp_test_eval
   mov $sarg0, "(and (= (let ((_x 0)) (set! _x 551) _x) 551) (= _x 99))"
-  mov $sarg1, "‚“‚…‚”I@‚Œ‚‚ƒ‚‚Œ"
+  mov $sarg1, "set! local"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (cons 1 2))) (set-car! x 'a) (equal? x (cons 'a 2)))"
-  mov $sarg1, "‚“‚…‚”|‚ƒ‚‚’I"
+  mov $sarg1, "set-car!"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (cons 1 2))) (set-cdr! x 'a) (equal? x (cons 1 'a)))"
-  mov $sarg1, "‚“‚…‚”|‚ƒ‚„‚’I"
+  mov $sarg1, "set-cdr!"
   gosub *lisp_test_eval
 
-  ;; Error tests
+;; Error tests
   ;; HACK: (and X (not X)) => X iff X is a error object.
   mov $sarg0, "(let ((x (error 'test))) (and x (not x)))"
-  mov $sarg1, "‚…‚’‚’‚‚’"
+  mov $sarg1, "error"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (car))) (and x (not x)))"
-  mov $sarg1, "‚”‚‚@‚†‚…‚—@‚‚’‚‡‚•‚‚…‚‚”‚“"
+  mov $sarg1, "too few arguments"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (car 1 2))) (and x (not x)))"
-  mov $sarg1, "‚”‚‚@‚‚‚‚™@‚‚’‚‡‚•‚‚…‚‚”‚“"
+  mov $sarg1, "too many arguments"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (car 1))) (and x (not x)))"
-  mov $sarg1, "‚—‚’‚‚‚‡@‚”‚™‚‚…"
+  mov $sarg1, "wrong type"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (if))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚‰‚†@”‚P"
+  mov $sarg1, "invalid if #1"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (if 1 2 3 4))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚‰‚†@”‚Q"
+  mov $sarg1, "invalid if #2"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (cond))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚ƒ‚‚‚„@”‚P"
+  mov $sarg1, "invalid cond #1"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (cond 1))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚ƒ‚‚‚„@”‚Q"
+  mov $sarg1, "invalid cond #2"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (lambda))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚Œ‚‚‚‚‚„‚@”‚P"
+  mov $sarg1, "invalid lambda #1"
   gosub *lisp_test_eval
   mov $sarg0, "(let ((x (lambda 1 2))) (and x (not x)))"
-  mov $sarg1, "‚‰‚‚–‚‚Œ‚‰‚„@‚Œ‚‚‚‚‚„‚@”‚Q"
+  mov $sarg1, "invalid lambda #2"
   gosub *lisp_test_eval
   return

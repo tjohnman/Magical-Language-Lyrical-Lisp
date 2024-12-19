@@ -1,4 +1,4 @@
-;;;こみやんシナリオ
+;;;Komiyan Scenario
 
 ;;480, 538, y400
 ;;600y460
@@ -29,68 +29,63 @@
   r_load ":l;img/three.bmp"
   bg "img/yama_b.bmp", E_NORMAL
   gosub *komiyan_vita
-ヴィータ「アリサたちを守る鮫島は、京都にいるアリサたちをほうって大阪に行ったよな？@/
-　このとき局員が他にもいて、京都に向かっていたらどうなってたんだろうな」\
+Vita: "Sharkjima, who was protecting Arisa and the others, left them in Kyoto and went to Osaka, right? @/
+  What would have happened if there were other agents heading to Kyoto at that time?"\
   gosub *komiyan_rein
-リイン「どうやら彼は、半径２００Ｋｍ以内の気配を察知できるらしいのです。@/
-京都にいれば、少なくとも近畿地方は全部範囲内なんですよ」\
+Rein: "Apparently, he can sense presences within a 200 km radius. @/
+If he's in Kyoto, then at least the entire Kinki region is within range."\
   gosub *komiyan_vita
-ヴィータ「ということは、追っ手が一人と分かったから、反撃に出たのかよ」\
+Vita: "So, he knew there was only one pursuer and that's why he counterattacked?"\
   gosub *komiyan_zafila
-ザフィーラ「それだけではない。相手が自分ひとりで倒せると踏んだ上での判断だ。@/
-戦力判断も出来るすごい能力といえるだろう」\
+Zafira: "That's not all. It was based on the assumption that he could defeat the opponent alone. It's an impressive ability to assess combat strength."\
   gosub *komiyan_vita
-ヴィータ「管理局がほしがるような逸材だな」\
+Vita: "He's quite the asset that the Bureau would want."\
   gosub *komiyan_rein
-リイン「でも、わざわざ正面から当たる意味はあったんでしょうか。@/
-こちらの居場所が知られていないなら、不意打ちしてこちらの損害を減らすべきだと思いますが……」\
+Rein: "But did he have to confront them directly? If our location wasn't known, I think he should have ambushed them to reduce our harm..."\
   gosub *komiyan_vita
-ヴィータ「騎士道精神に反するからだろ」\
+Vita: "Because it goes against the spirit of chivalry."\
   gosub *komiyan_rein
-リイン「彼は執事ですけど……」\
+Rein: "But he's a butler..."\
   gosub *komiyan_vita
-ヴィータ「じゃあ、執事道精神だ」\
+Vita: "Then it's the spirit of a butler."\
   gosub *komiyan_rein
-リイン「執事道ってなんですか」\
+Rein: "What's the spirit of a butler?"\
   gosub *komiyan_zafila
-ザフィーラ「しかし、この反撃は失敗だったかもしれんな」\
+Zafira: "However, this counterattack might have been a failure."\
   gosub *komiyan_rein
-リイン「え？　なんでですか。ちゃんと撃退しましたよ」\
+Rein: "Huh? Why is that? We repelled them properly."\
   gosub *komiyan_zafila
-ザフィーラ「だから、管理局も本腰になって、なのはまで投入したのだろう」\
+Zafira: "That's why. The Bureau got serious and even sent in Nanoha."\
   gosub *komiyan_vita
-ヴィータ「でも、逃げ回ったって、見つからなければ、向こうも本気になるんだろ？@/
-　結局、一緒じゃねーのか？」\
+Vita: "But if we keep running and don't get caught, wouldn't that make them serious too? @/
+  In the end, isn't it the same thing?"\
   gosub *komiyan_zafila
-ザフィーラ「しかし、時間稼ぎにはなる。@/
-なのはに連絡できなかったのは、早期になのはが捕獲作戦に参加したからだろう」\
+Zafira: "However, it would buy time. Not being able to contact Nanoha early must mean they joined the capture operation early."\
   gosub *komiyan_rein
-リイン「そうか。そうすれば、管理局より先になのはさんに接触できたかもしれないですね」\
+Rein: "I see. That way, we might have been able to contact Nanoha-san before the Bureau."\
   gosub *komiyan_vita
-ヴィータ「で、なのはにうやむやにしてもらう、ってか？」\
+Vita: "And then have Nanoha cover it up for us?"\
   gosub *komiyan_zafila
-ザフィーラ「それにしても、老人一人とはいえ、局員を一人しか派遣しないとは……。@/
-時空管理局も地に落ちたか」\
+Zafira: "Even so, sending only one agent, even if dealing with only one old man, seems... @/
+Has the Time-Space Administration Bureau hit rock bottom?"\
   gosub *komiyan_vita
-ヴィータ「でも、強力なデバイスを持たせてるぜ。@/
-全くやる気がないわけじゃねーみたいだな」\
+Vita: "But they equip them with powerful devices. @/
+It's not like they have no intention of doing anything."\
   gosub *komiyan_zafila
-ザフィーラ「よく分からんことをするな。ちゃんと捕らえたいならもっと人員を投入すればよい。@/
-捜索に人員を割くのは基本だ。捕らえる気が無いなら、強力なデバイスなど使う意味はない」\
+Zafira: "They do strange things. If they really want to capture him, they should send more personnel. @/
+Allocating manpower for the search is fundamental. If they don't intend to capture, there's no point in using powerful devices."\
   gosub *komiyan_vita
-ヴィータ「そのデバイスは役に立たなかったみたいだけどな。@/
-いや、そもそも、捕らえる気がないんなら、誰も送り込む必要なんかないんじゃねーのか？」\
+Vita: "That device didn't seem to help. @/
+Well, if they don't intend to capture, there's no need to send anyone in the first place, right?"\
   gosub *komiyan_rein
-リイン「まぁ、ＬＩＳＰマシンを使っているようなところですから、私たちには理解できない何かがあるのでしょう」\
+Rein: "Well, since they're using something like a LISP machine, there must be something beyond our understanding."\
   gosub *komiyan_zafila
-ザフィーラ「普通のやつらの上を行っている、ということか」\
+Zafira: "So, they're a step above ordinary people."\
   stop
   csp SP_ARROW
   csp SP_R
   bg black, E_SLOW
   goto *title
-
-
 
 *hint
   bgm ms_setsume
@@ -98,41 +93,29 @@
   r_load ari_n
   l_load suzu_nc
   bg "img/blackboard.bmp", E_SLOW
-すずか「リリカルＬｉｓｐを最後までプレイし
-　　　　ていただきありがとうございます」\
-アリサ「このゲームはエンディングが二つ用意
-　　　　されているわ。ちゃんと二つとも見れ
-　　　　たかしら？」\
-すずか「まだ、一つしか見てないという人にヒ
-　　　　ントを出すね」\
+Suzuka「Thank you for playing Lyrical Lisp all the way to the end」\
+Arisa「This game has two endings. Did you manage to see both of them properly?」\
+Suzuka「For those who have only seen one, here's a hint」\
   r_show ari_exc
-アリサ「物語が分岐するのは、鮫島がなのはと
-　　　　戦うところなの」\
+Arisa「The story branches when Samejima fights with Nanoha」\
   l_show suzu_ase
-すずか「なのはちゃんは物凄く強いよね。@/
+Suzuka「Nanoha-chan is incredibly strong, isn't she?@/
   l_show suzu_n
-だけ
-　　　　ど鮫島さんも素質があるから、努力を
-　　　　すれば実は勝てちゃうの」\
+But
+　　　　Samejima-san also has potential, so if he puts in effort, he can actually win」\
   r_show ari_n
-アリサ「重要なのは#FFFF33たたかう#FFFFFFを選んで使える技
-　　　　の種類よ」\
+Arisa「The important thing is the types of skills you can use when you choose to #FFFF33fight#FFFFFF」\
   l_show suzu_qes
-すずか「『最後まで三種類しか使えなかった』
-　　　　なんてことはない？」\
-アリサ「実は、ある条件を満たすと、鮫島が使
-　　　　える技の数が増えるの」\
+Suzuka「Isn't there a case where you could only use three types until the end?」\
+Arisa「Actually, if you fulfill a certain condition, the number of skills Samejima can use will increase」\
   l_show suzu_excc
-すずか「ヒントは、この黒板の左下に見える、
-　　　　ウサギのぬいぐるみだよ」\
+Suzuka「The hint is the stuffed rabbit visible in the lower left of this blackboard」\
   r_show ari_hrt
-アリサ「クリックしたらきっと面白いことが起
-　　　　こるわよ」\
+Arisa「If you click on it, something interesting will definitely happen」\
   l_show suzu_ase
-すずか「面白いというか、少しかわいそうなこ
-　　　　とをする必要があるんだけどね」\
+Suzuka「It's interesting, but you might need to do something a little pitiful」\
   r_show ari_n
-アリサ「それじゃあ、あとは頑張ってね！」\
+Arisa「Alright then, do your best from here on out!」\
   stop
   csp SP_R : csp SP_L
   bg black, E_SLOW

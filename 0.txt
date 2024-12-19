@@ -33,14 +33,11 @@
 ;;;   We should call "mem_init" after load (?)
 ;;;;;;;;;;
 
-
-
-
 *define
 nsa
   textgosub *text_cw
 
-  ; Effect
+; Effect
   numalias E_FAST, 10
   numalias E_NORMAL, 11
   numalias E_SLOW, 12
@@ -62,18 +59,18 @@ nsa
   effect E_WIPE2, 15, 600, "img/wipe2.bmp"
   effect E_CURCLE, 15, 2000, "img/curcle.bmp"
 
-  ; Sprites
+; Sprites
   numalias SP_FILL, 0
   numalias SP_CLICK, 1
   numalias SP_CLICK_MINI, 2
 
-  ; Temporary
+; Temporary
   numalias SP_TMP, 10
   numalias SP_TMP1, 11
   numalias SP_TMP2, 12
   numalias SP_TMP3, 13
 
-  ; Opening
+; Opening
   numalias SP_LOGO0, 20
   numalias SP_LOGO1, 21
   numalias SP_LOGO_LAMBDA, 23
@@ -84,7 +81,7 @@ nsa
   numalias SP_TITLE, 31
   numalias SP_TITLE_HOSHI, 32
 
-  ; Ending
+; Ending
   numalias SP_SAME_HEAD, 40
   numalias SP_SAME_BODY, 41
   numalias SP_SAME_FOOT, 42
@@ -97,7 +94,7 @@ nsa
   numalias SP_ST, 49
   numalias SP_EFRAME, 50
 
-  ; Baseball
+; Baseball
   numalias SP_BALL, 100
   numalias SP_REIN01, 101
   numalias SP_REIN02, 102
@@ -106,7 +103,7 @@ nsa
   numalias SP_VITA02, 112
   numalias SP_ARROW, 119
 
-  ;Right click
+;Right click
   numalias SP_RC_BACK, 210
   numalias SP_RC_1, 201
   numalias SP_RC_2, 202
@@ -114,7 +111,7 @@ nsa
   numalias SP_RC_4, 204
   numalias SP_RC_5, 205
 
-  ; Noroi-sama
+; Noroi-sama
   numalias SP_NOROI_HALF, 800
   numalias SP_NOROI, 801
   numalias SP_NOROI_D1, 802
@@ -122,30 +119,30 @@ nsa
   numalias SP_NOROI_HD2, 804
   numalias SP_NOROI_HD1, 805
 
-  ; Character
+; Character
   numalias SP_CRC, 809
   numalias SP_L, 810
   numalias SP_R, 811
   numalias SP_C, 812
 
-  ; Stuffed rabbit
+; Stuffed rabbit
   numalias SP_USAGI, 816
   numalias SP_USAGI_R, 817
 
-  ; Figure
+; Figure
   numalias SP_DGM0, 850
   numalias SP_DGM1, 851
   numalias SP_DGM2, 852
   numalias SP_DGM3, 853
 
-  ; Other settings for pictures
+; Other settings for pictures
   numalias SP_BACKGROUND, 900
   numalias SP_DUMMY, 999
   humanz 800  ; Sprites whose numbers <= 800 are drawn on front.
   windowback  ; Window is the same as above.
   usewheel
 
-  ; Constants
+; Constants
   ;; Heap is used for any lisp objects (100 <= heap < 3000)
   numalias HEAP, 100
   numalias HEAP_LAST, 2999
@@ -178,11 +175,11 @@ nsa
   numalias DEFAULT_EVAL_LIMIT, 20000
   numalias UNBOUND, 4095
 
-  ;;;
+;;;
   ;;; Next variable number: 95
   ;;;
 
-  ; Aliases for numerical variables
+; Aliases for numerical variables
   ;; General variables
   numalias tmp, 50
   numalias ret, 51
@@ -194,7 +191,7 @@ nsa
   numalias tmp2, 57
   numalias tmp3, 58
 
-  ;; Special variables
+;; Special variables
   numalias sp, 59
   numalias free_lst, 60
   numalias i, 61
@@ -203,7 +200,7 @@ nsa
   numalias symbol_used, 64
   numalias ssp, 65
 
-  ;; Lisp object
+;; Lisp object
   numalias nil, 66
   numalias quote, 67
   numalias global_env, 68
@@ -211,7 +208,7 @@ nsa
   numalias sharp_f, 70
   numalias toplevel_env, 71
 
-  ;; Garbage collection
+;; Garbage collection
   numalias gc_count, 72
   numalias symbol_lst, 73
   numalias symbol_offset, 74
@@ -220,14 +217,14 @@ nsa
   numalias gc_silent, 77
   numalias gc_mark_color, 94
 
-  ;; Debug
+;; Debug
   ;; NOTE: current_proc and current_env are not protected from GC so far.
   ;;       We should protect them if GC moves objects.
   numalias current_proc, 78
   numalias current_env, 79
   numalias in_ex_test, 80
 
-  ;; Syntax keyword symbol
+;; Syntax keyword symbol
   numalias sym_begin, 81
   numalias sym_cond, 82
   numalias sym_lambda, 83
@@ -242,13 +239,13 @@ nsa
   numalias sym_time, 92
   numalias sym_else, 93
 
-  ;; Error messages
+;; Error messages
   stralias str_too_few_arguments, "Too-few-arguments"
   stralias str_too_many_arguments, "Too-many-arguments"
   stralias str_invalid_syntax, "Invalid-syntax"
   stralias str_stack_overflow, "Stack-overflow"
 
-  ; Variables for the game
+; Variables for the game
   numalias save_flag, 0
   numalias adv_tmp, 1
   numalias adv_tmp1, 2
@@ -283,7 +280,7 @@ nsa
   numalias adv_num_loss, 31
   numalias adv_error, 32
 
-  ; Aliases for string variables
+; Aliases for string variables
   numalias sarg0, 10
   numalias sarg1, 11
   numalias sarg2, 12
@@ -301,10 +298,10 @@ nsa
   numalias ret_label, 25
   numalias suc_label, 26
 
-  numalias sadv_label, 50
+numalias sadv_label, 50
   numalias sadv_vol, 51
 
-  ; Paths for image files
+; Paths for image files
   stralias ari_n, ":l;img/arisa-01.bmp"
   stralias ari_tun, ":l;img/arisa-02.bmp"
   stralias ari_qes, ":l;img/arisa-03.bmp"
@@ -338,7 +335,7 @@ nsa
   stralias suzur_dotc, ":l;img/suzuka-10r.bmp"
   stralias suzur_dot, ":l;img/suzuka-11r.bmp"
 
-  ; Paths for sound files
+; Paths for sound files
   stralias ms_ex, "bgm/ex.mp3"
   stralias ms_narumi, "bgm/narumi.mp3"
   stralias ms_kyoto, "bgm/kyoto.mp3"
@@ -357,7 +354,7 @@ nsa
   stralias ms_omake, "bgm/omake.mp3"
   stralias ms_title, "bgm/title.mp3"
 
-  ; SUBR
+; SUBR
   numalias lf_car, 0
   numalias lf_cdr, 1
   numalias lf_cons, 2
@@ -386,23 +383,23 @@ nsa
   numalias lf_write, 25
   numalias lf_error, 26
 
-  defaultspeed 50,15,5
+defaultspeed 50,15,5
   caption "Magical Language Lyrical Lisp"
   versionstr "Magical Language Lyrical Lisp", "Open Source"
   resetmenu
-  insertmenu "終了", END
-  insertmenu "バージョン情報", VERSION
-  insertmenu "選択肢まで進む", SKIP
-  insertmenu "文字速度", SUB
-  insertmenu "低速", TEXTSLOW, 1
-  insertmenu "普通", TEXTMIDDLE, 1
-  insertmenu "高速", TEXTFAST, 1
-  insertmenu "フォント", FONT
-  insertmenu "画面", SUB
-  insertmenu "フルスクリーン", FULL, 1
-  insertmenu "ウインドウ", WINDOW, 1
+  insertmenu "End", END
+  insertmenu "Version Information", VERSION
+  insertmenu "Skip to Selection", SKIP
+  insertmenu "Text Speed", SUB
+  insertmenu "Slow", TEXTSLOW, 1
+  insertmenu "Normal", TEXTMIDDLE, 1
+  insertmenu "Fast", TEXTFAST, 1
+  insertmenu "Font", FONT
+  insertmenu "Screen", SUB
+  insertmenu "Fullscreen", FULL, 1
+  insertmenu "Window", WINDOW, 1
 
-  ; Define subroutines for the game
+; Define subroutines for the game
   defsub r_in
   defsub r_out
   defsub l_in
@@ -420,52 +417,47 @@ nsa
   defsub load_dgm
   defsub wait_dgm
 
-  game
-
+game
 
 ;;;;;;;;;;
 ;;;*push(val)
 ;;; modifies: %sp
 ;;;;;;;;;;
 *push
-  if %sp >= STACK_LIMIT mesbox "スタックオーバフロー", "Error" : end
+  if %sp >= STACK_LIMIT mesbox "Stack Overflow", "Error" : end
   mov %%sp, %arg0
   inc %sp
   return
-
 
 ;;;;;;;;;;
 ;;;*pop()
 ;;; modifies: %ret, %sp
 ;;;;;;;;;;
 *pop
-  if %sp <= STACK mesbox "Popできません", "Error" : end
+  if %sp <= STACK mesbox "Cannot pop", "Error" : end
   dec %sp
   mov %ret, %%sp
   return
-
 
 ;;;;;;;;;;
 ;;;*spush(val)
 ;;; modifies: %ssp
 ;;;;;;;;;;
 *spush
-  if %ssp >= STACK_LIMIT mesbox "スタックオーバフロー", "Error" : end
+  if %ssp >= STACK_LIMIT mesbox "Stack Overflow", "Error" : end
   mov $%ssp, $sarg0
   inc %ssp
   return
-
 
 ;;;;;;;;;;
 ;;;*spop()
 ;;; modifies: $sret, %ssp
 ;;;;;;;;;;
 *spop
-  if %ssp <= SSTACK mesbox "Popできません" "Error" : end
+  if %ssp <= SSTACK mesbox "Cannot pop" "Error" : end
   dec %ssp
   mov $sret, $%ssp
   return
-
 
 ;;;;;;;;;;
 ;;;*get_gc(obj)
@@ -474,7 +466,6 @@ nsa
 *get_gc
   mov %ret, %%arg0 mod 2
   return
-
 
 ;;;;;;;;;;
 ;;;*set_gc(obj, flag)
@@ -487,7 +478,6 @@ nsa
   mov %%arg0, %tmp + %arg1
   return
 
-
 ;;;;;;;;;;
 ;;;*get_tag(obj)
 ;;; modifies: %tmp, %ret
@@ -498,7 +488,6 @@ nsa
   mov %ret, %tmp
   div %ret, 2
   return
-
 
 ;;;;;;;;;;
 ;;;*set_tag(obj, tag)
@@ -513,7 +502,6 @@ nsa
   mov %tmp3, %arg1 * 2  ; TAG
   mov %%arg0, %tmp1 + %tmp2 + %tmp3
   return
-
 
 ;;;;;;;;;;
 ;;;*get_data(obj)
@@ -536,7 +524,6 @@ nsa
   div %ret, 64
   return
 
-
 ;;;;;;;;;;
 ;;;*set_data(obj, data)
 ;;; modifies: %tmp, %tmp1, %tmp2
@@ -547,7 +534,6 @@ nsa
   mov %tmp2, %arg1 * 64
   mov %%arg0, %tmp1 + %tmp2
   return
-
 
 ;;;;;;;;;;
 ;;;*car(obj)
@@ -561,7 +547,6 @@ nsa
   mov %ret, %ret mod 8192  ; 2^13
   return
 
-
 ;;;;;;;;;;
 ;;;*cdr(obj)
 ;;; modifies: %ret
@@ -573,7 +558,6 @@ nsa
   gosub *get_data
   div %ret, 8192  ; 2^13
   return
-
 
 ;;;;;;;;;;
 ;;;*set_car(obj0, obj1)
@@ -598,7 +582,6 @@ nsa
   gosub *set_data
   return
 
-
 ;;;;;;;;;;
 ;;;*set_cdr(obj0, obj1)
 ;;;  See *set_car.
@@ -620,7 +603,6 @@ nsa
   gosub *set_data
   return
 
-
 ;;;;;;;;;;
 ;;;*mem_init()
 ;;;;;;;;;;
@@ -631,7 +613,7 @@ nsa
   mid $sCR, $stmp, 1, 1
   mid $sLF, $stmp, 2, 1
 
-  mov %gc_run, 0
+mov %gc_run, 0
   mov %gc_mark_color, 1
   mov %eval_limit, DEFAULT_EVAL_LIMIT
   mov %symbol_offset, 0
@@ -665,7 +647,6 @@ nsa
   mov %current_env, %global_env
   return
 
-
 ;;;;;;;;;;
 ;;;*next_cell()
 ;;;;;;;;;;
@@ -673,7 +654,7 @@ nsa
   ; If there is no cell, then do GC.
   if %free_lst == HEAP_LIMIT gosub *gc
   ; If there is no cell after GC, then quit.
-  if %free_lst == HEAP_LIMIT mesbox "メモリ不足", "Error" : end
+  if %free_lst == HEAP_LIMIT mesbox "Memory shortage", "Error" : end
   mov %arg0, %free_lst  ; %arg0 = current cell
   gosub *get_data       ; %ret = next cell
   mov %free_lst, %ret
@@ -681,7 +662,6 @@ nsa
   gosub *set_gc         ; set_gc(current cell, unmarked color)
   mov %ret, %arg0
   return
-
 
 ;;;;;;;;;;
 ;;;*reuse_cell(obj, i)
@@ -691,7 +671,6 @@ nsa
   mov %arg1, TAG_FREE
   gosub *set_tag
   return
-
 
 ;;;;;;;;;;
 ;;;*gc()
@@ -717,7 +696,6 @@ if %gc_silent >= 1 goto *gc_sl2
   gosub *pop_registers
   mov %gc_mark_color, 1 - %gc_mark_color  ; Flip the mark color.
   return
-
 
 ;;;;;;;;;;
 ;;;*gc_mark_lobject(obj)
@@ -749,7 +727,6 @@ if %gc_silent >= 1 goto *gc_sl2
   gosub *cdr      ; CDR(obj)
   mov %arg0, %ret
   goto *gc_mark_lobject
-
 
 ;;;;;;;;;;
 ;;;*gc_mark_syntax_keyword()
@@ -784,7 +761,6 @@ if %gc_silent >= 1 goto *gc_sl2
   mov %arg0, %sym_else
   gosub *gc_mark_lobject
   return
-
 
 ;;;;;;;;;;
 ;;;*gc_mark()
@@ -824,7 +800,7 @@ if %gc_silent >= 1 goto *gc_sl2
   *gc_sweep_next0
   next
   if %free_lst == HEAP_LIMIT return  ; There is no unused cell.
-  mov %gc_tmp, %free_lst  ; Keep the first unusd cell.
+  mov %gc_tmp, %free_lst  ; Keep the first unused cell.
   for %i=%i+1 to HEAP_LAST
     mov %arg0, %i
     gosub *get_gc
@@ -868,7 +844,6 @@ if %gc_silent >= 1 goto *gc_sl2
   gosub *push       ; S(tmp3, tmp2, tmp1, tmp, arg3, arg2, arg1, arg0)
   return
 
-
 *pop_registers
   gosub *pop        ; tmp3 < S(tmp2, tmp1, tmp, arg3, arg2, arg1, arg0)
   mov %tmp3, %ret
@@ -887,7 +862,6 @@ if %gc_silent >= 1 goto *gc_sl2
   gosub *pop        ; arg0 < S()
   mov %arg0, %ret
   return
-
 
 ;;;;;;;;;;
 ;;;*symbol_gc()
@@ -918,7 +892,7 @@ if %gc_silent >= 1 goto *symbol_gc_sl1
   inc %symbol_used
   mov %tmp, %symbol_used - SYMBOL_SET
   sub %tmp, %symbol_offset
-  if %tmp >= SYMBOL_SET_HALF_SIZE mesbox "メモリ不足", "Error" : end
+  if %tmp >= SYMBOL_SET_HALF_SIZE mesbox "Memory Shortage", "Error" : end
   mov %arg0, %i
   gosub *raw_cdr
   mov %i, %ret
@@ -934,7 +908,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop_registers
   return
 
-
 ;;;;;;;;;;
 ;;;*create_cons()
 ;;;;;;;;;;
@@ -945,7 +918,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_tag
   mov %ret, %arg0
   return
-
 
 ;;;;;;;;;;
 ;;;*create_num(n)
@@ -964,7 +936,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_data
   mov %ret, %arg0
   return
-
 
 ;;;;;;;;;;
 ;;;*create_symbol(str)
@@ -1001,7 +972,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   if %tmp >= SYMBOL_SET_HALF_SIZE  gosub *gc : gosub *symbol_gc
   return
 
-
 ;;;;;;;;;;
 ;;;*create_subr(n)
 ;;;;;;;;;;
@@ -1016,7 +986,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_data
   mov %ret, %arg0
   return
-
 
 ;;;;;;;;;;
 ;;;*create_expr(form, arg, env)
@@ -1066,7 +1035,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_cdr     ; new cons = (env arg . form)
   gosub *pop         ; new cons < S()
   return             ; %ret = new cons
-
 
 ;;;;;;;;;;
 ;;;*create_error(str)
@@ -1201,7 +1169,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg1, 2
   goto *popn_and_invstx
 
-
 ;;;;;;;;;;
 ;;;*set_error_to_arg0(str)
 ;;;;;;;;;;
@@ -1227,18 +1194,17 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *lobject_to_string
   mov $stmp, $sret
   gosub *spop
-  mov $sarg0, $stmp + "は" + $sret + "ではありません"
+  mov $sarg0, $stmp + " is not a " + $sret
   goto *set_error_to_arg0  ; tail call
 *cons_required
-  mov $sarg0, "コンス"
+  mov $sarg0, "cons"
   goto *set_type_error_to_arg0
 *number_required
-  mov $sarg0, "数"
+  mov $sarg0, "number"
   goto *set_type_error_to_arg0
 *list_required
-  mov $sarg0, "リスト"
+  mov $sarg0, "list"
   goto *set_type_error_to_arg0
-
 
 ;;;;;;;;;;
 ;;;*next_token(str)
@@ -1291,7 +1257,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   next
   return
 
-
 ;;;;;;;;;;
 ;;;*skip_sarg0(str)
 ;;sarg0 : Substring
@@ -1312,7 +1277,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop         ; %arg0
   mov %arg0, %ret
   return
-
 
 ;;;;;;;;;;
 ;;;*is_number(str)
@@ -1367,7 +1331,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   if %tmp == 1 mov %arg0, %arg0 * -1
   mov %ret, 0
   return
-
 
 ;;;;;;;;;;
 ;;;*translate_quote(str)
@@ -1428,9 +1391,9 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *next_token
   len %tmp1, $sarg0
   mid $sarg0, $sarg0, %ret, %tmp1-%ret
-  if $sret == "（" gosub *input_to_list : return
-  if $sret == "’" gosub *translate_quote : return
-  if $sret == "）" mov %ret, %nil : return
+  if $sret == "(" gosub *input_to_list : return
+  if $sret == "'" gosub *translate_quote : return
+  if $sret == ")" mov %ret, %nil : return
   gosub *spush        ; SS(rest_str)
   mov $sarg0, $sret
   gosub *is_number
@@ -1439,14 +1402,13 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *create_num
   goto *input_to_lobject_finish
 *input_to_lobject_not_number
-  if $sarg0 == "＃t" mov %ret, %sharp_t : goto *input_to_lobject_finish
-  if $sarg0 == "＃f" mov %ret, %sharp_f : goto *input_to_lobject_finish
+  if $sarg0 == "#t" mov %ret, %sharp_t : goto *input_to_lobject_finish
+  if $sarg0 == "#f" mov %ret, %sharp_f : goto *input_to_lobject_finish
   gosub *create_symbol
 *input_to_lobject_finish  ; %ret = object
   gosub *spop         ; rest_str < SS()
   mov $sarg0, $sret
   return
-
 
 ;;;;;;;;;;
 ;;;*input_to_list(str)
@@ -1464,8 +1426,8 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *next_token    ; $sarg0 = next token and discard %ret
   gosub *pop           ; current < S(root)
   mov %tmp, %ret       ; %tmp = current
-  if $sret == "）" goto *input_to_list_l2
-  if $sret == "．" goto *input_to_list_l3
+  if $sret == ")" goto *input_to_list_l2
+  if $sret == "." goto *input_to_list_l3
   goto *input_to_list_l4
 
 *input_to_list_l2  ; ')'
@@ -1519,13 +1481,12 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   goto *input_to_list_l1
   return
 
-
 ;;;;;;;;;;
 ;;;*cons_to_string(obj)
 ;;sret : Translated string
 ;;;;;;;;;;
 *cons_to_string
-  mov $stmp3, "（"
+  mov $stmp3, "("
 *cons_to_string_l1
   gosub *push                  ; obj
   gosub *car
@@ -1550,17 +1511,16 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov $stmp2, $sret
   gosub *spop
   mov $stmp3, $sret
-  mov $stmp3, $stmp3 + "　．" + $stmp2
+  mov $stmp3, $stmp3 + " ." + $stmp2
   goto *cons_to_string_l2
 *cons_to_string_l11
-  mov $stmp3, $stmp3 + "　"  ; ZENKAKU space
+  mov $stmp3, $stmp3 + " "  ; ZENKAKU space
   goto *cons_to_string_l1
 *cons_to_string_l2
-  mov $stmp3, $stmp3 + "）"
+  mov $stmp3, $stmp3 + ")"
   mov $sarg0, $stmp3
   gosub *print_string
   return
-
 
 ;;;;;;;;;;
 ;;;*lobject_to_string(obj)
@@ -1579,7 +1539,7 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   if %ret == TAG_CONS gosub *cons_to_string : return
   return
 *lobject_to_string_proc
-  mov $sarg0, "＃＜ｐｒｏｃｅｄｕｒｅ＞"
+  mov $sarg0, "#<procedure>"
   gosub *print_string
   return
 *lobject_to_string_expr
@@ -1589,12 +1549,12 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *car
   if %ret == %nil goto *lobject_to_string_expr_thunk
   gosub *cons_to_string_l1
-  mov $sarg0, "＃＜ｐｒｏｃｅｄｕｒｅ（lambda" + $sret + "＞"
+  mov $sarg0, "#<procedure(lambda" + $sret + ">"
   gosub *print_string
   return
 *lobject_to_string_expr_thunk
   gosub *cons_to_string_l1
-  mov $sarg0, "＃＜ｐｒｏｃｅｄｕｒｅ（lambda　" + $sret + "＞"
+  mov $sarg0, "#<procedure(lambda " + $sret + ">"
   gosub *print_string
   return
 *lobject_to_string_num
@@ -1603,8 +1563,8 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *print_string
   return
 *lobject_to_string_bool
-  if %arg0 == %sharp_t mov $sarg0, "＃t"
-  if %arg0 == %sharp_f mov $sarg0, "＃f"
+  if %arg0 == %sharp_t mov $sarg0, "#t"
+  if %arg0 == %sharp_f mov $sarg0, "#f"
   gosub *print_string
   return
 *lobject_to_string_sym
@@ -1632,39 +1592,39 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *print_string
   mov $stmp, $sret    ; message
   gosub *spop         ; location
-  mov $sret, "エラー：" + $sret + "において、" + $stmp
+  mov $sret, "Error: At " + $sret + ", " + $stmp
   return
 *lobject_to_string_err_few
   gosub *spop         ; location
-  mov $sret, "エラー：" + $sret + "に与える引数が少なすぎます"
+  mov $sret, "Error: Too few arguments to give at " + $sret
   return
 *lobject_to_string_err_many
   gosub *spop         ; location
-  mov $sret, "エラー：" + $sret + "に与える引数が多すぎます"
+  mov $sret, "Error: Too many arguments to give at " + $sret
   return
 *lobject_to_string_err_inv
   gosub *spop         ; location
-  mov $sret, "エラー：" + $sret + "の使い方が間違っています"
+  mov $sret, "Error: Incorrect usage at " + $sret
   return
 *lobject_to_string_err_stack
   gosub *spop         ; location
-  mov $sret, "エラー：スタックオーバフロー"
+  mov $sret, "Error: Stack overflow"
   return
 *lobject_to_string_var
   gosub *push         ; S(var)
   gosub *cdr          ; symbol
   mov %arg0, %ret
   gosub *lobject_to_string_sym
-  mov $sret, $sret + "＜"
+  mov $sret, $sret + "<"
   gosub *pop          ; var < S()
   mov %arg0, %ret     ; %arg0 = var
   gosub *car          ; (frame << 6) + index
   mov %tmp, %ret / 64 ; %tmp = frame
   itoa2 $sarg0, %tmp
-  mov $sret, $sret + $sarg0 + "，"
+  mov $sret, $sret + $sarg0 + ","
   mov %tmp, %ret mod 64  ; %tmp = index
   itoa2 $sarg0, %tmp
-  mov $sret, $sret + $sarg0 + "＞"
+  mov $sret, $sret + $sarg0 + ">"
   return
 *lobject_to_string_gvar
   gosub *car          ; symbol
@@ -1680,7 +1640,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   len %tmp, $sret
   if %tmp mod 2 == 1 mov $sret, $sret + " "
   return
-
 
 ;;;;;;;;;;
 ;;;*assoc(key, lst)
@@ -1707,7 +1666,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg0, %ret
   goto *assoc       ; tail recursion
 
-
 ;;;;;;;;;;
 ;;;*rassoc(key, lst)
 ;;;;;;;;;;
@@ -1732,7 +1690,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop        ; key
   mov %arg0, %ret
   goto *rassoc      ; tail recursion
-
 
 ;;;;;;;;;;
 ;;;*find_var(var, env)
@@ -1764,7 +1721,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg0, %ret   ; %ret0 = var
   goto *find_var
 
-
 ;;;;;;;;;;
 ;;;*find_val(val, env)
 ;;;;;;;;;;
@@ -1794,7 +1750,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop        ; var < S()
   mov %arg0, %ret   ; %ret0 = val
   goto *find_val
-
 
 ;;;;;;;;;;
 ;;;*find_local_var_cell(env, frame, index)
@@ -1828,7 +1783,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %ret, %arg0
   return
 
-
 ;;;;;;;;;;
 ;;;*nconc(lst, obj)
 ;;;;;;;;;;
@@ -1856,7 +1810,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop       ; root
   return
 
-
 ;;;;;;;;;;
 ;;;*eval(obj, env)
 ;;;;;;;;;;
@@ -1883,7 +1836,7 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   return
 *eval_unbound
   gosub *lobject_to_string
-  mov $sarg0, $sret + "は未束縛です"
+  mov $sarg0, $sret + " is unbound"
   goto *create_error; tail call
 *eval_local_var
   gosub *car              ; (frame << 6) + index
@@ -1937,15 +1890,14 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
 *eval_maybe_abort
   gosub *confirm_abort
   if %eval_count == 0 goto *eval_resume
-  mov $sarg0, "計算を中断しました"
+  mov $sarg0, "Calculation was interrupted"
   goto *create_error  ; taill call
 *eval_resume
-  計算を再開します
+  Resuming calculation
   goto *eval
 *eval_stack_overflow
   mov $sarg0, str_stack_overflow
   goto *create_error  ; tail call
-
 
 ;;;;;;;;;;
 ;;;*apply(fn, arg, env)
@@ -1984,9 +1936,8 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *get_tag
   if %ret == TAG_ERROR mov %ret, %arg0 : return
   gosub *lobject_to_string
-  mov $sarg0, $sret + "は関数ではありません"
+  mov $sarg0, $sret + "is not a function"
   goto *create_error  ; tail call
-
 
 ;;;;;;;;;;
 ;;;*expr_call(fn, env)
@@ -2009,7 +1960,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop           ; new env < S()
   mov %arg2, %ret      ; %arg2 = new env
   goto *syntax_fn_begin  ; tail call
-
 
 ;;;;;;;;;;
 ;;;*evstack(arg, env)
@@ -2061,7 +2011,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %ret, %sharp_t
   return
 
-
 ;;;;;;;;;;
 ;;;*create_new_env()
 ;;;;;;;;;;
@@ -2078,7 +2027,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_cdr  ; new cons = (nil . nil)
   gosub *pop      ; new cons < S()
   return
-
 
 ;;;;;;;;;;
 ;;;*create_expr_env_using_stack(fn)
@@ -2256,7 +2204,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *set_car      ; env = (cons1 . rest-frame)
   return
 
-
 ;;;;;;;;;;
 ;;;*finish_env_v2(env)
 ;;;  Correct first frame of local environment and return the environment.
@@ -2292,7 +2239,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop            ; arg < S()
   if %arg0 == %nil mov %arg0, %ret : return
   goto *too_many_arg0   ; tail call
-
 
 ;;;;;;;;;;
 ;;;*wrong_stack_arguments(farg, aarg)
@@ -2766,7 +2712,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov $sarg0, $sret
   goto *create_error  ; tail call
 
-
 ;;;;;;;;;;
 ;;;*syntax_fn(fn, arg, env)
 ;;;  Returns syntax function label and #t if fn is keyword.
@@ -2922,7 +2867,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *add_global_bind
   gosub *pop
   return
-
 
 *syntax_fn_set
   mov %arg0, %arg2
@@ -3170,7 +3114,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   dec %gc_silent
   return
 
-
 ;;;;;;;;;;
 ;;;*nreverse(list)
 ;;;  Reverse a list destructively.
@@ -3194,7 +3137,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop          ; CDR(list) < S()
   mov %arg0, %ret     ; %arg0 = CDR(list)
   goto *nreconc
-
 
 ;;;;;;;;;;
 ;;;*reverse(list)
@@ -3235,7 +3177,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg0, %ret
   goto *revappend
 
-
 ;;;;;;;;;;
 ;;;*eval_form(form, env)
 ;;;  Translate form and evaluate it. The env is ignored.
@@ -3258,7 +3199,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov $sarg0, "*translate_begin"
   gosub *translate1   ; S()
   goto *eval_form_after_translation
-
 
 ;;;;;;;;;;
 ;;;*translate_form(form)
@@ -4201,7 +4141,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg0, %ret     ; %arg0 = rest
   goto *translate_letrec_gennil_loop
 
-
 ;;;;;;;;;;
 ;;;*split_let_binds(binds)
 ;;;  Split a let-style binds list into formal arguments and actual arguments.
@@ -4289,7 +4228,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %%tmp, %ret     ; S(fargs, aargs)
   mov %ret, %sharp_t
   return
-
 
 ;;;;;;;;;;
 ;;;*debruijn(form, env)
@@ -4470,7 +4408,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg1, %toplevel_env
   goto *find_var  ; tail call
 
-
 ;;;;;;;;;;
 ;;;*add_global_bind(env, sym, val)
 ;;;;;;;;;;
@@ -4520,7 +4457,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop          ; env < S()
   return
 
-
 ;;;;;;;;;;
 ;;;*add_subr_to_env(env, name, n)
 ;;sarg0 = name
@@ -4544,7 +4480,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *pop            ; env < S()
   mov %arg0, %ret       ; arg0 = env
   goto *add_global_bind ; tail call
-
 
 ;;;;;;;;;;
 ;;;*set_global_env()
@@ -4590,7 +4525,7 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *create_symbol
   mov %sym_else, %ret
 
-  mov $sarg0, "(())"
+mov $sarg0, "(())"
   gosub *input_to_lobject
   mov %global_env, %ret
   mov %toplevel_env, %global_env
@@ -4629,7 +4564,7 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *add_subr_to_env  ; *
   mov %arg0, %global_env
   mov %arg1, lf_div
-  mov $sarg0, "／"
+  mov $sarg0, "/"
   gosub *add_subr_to_env  ; /
   mov %arg0, %global_env
   mov %arg1, lf_mod
@@ -4637,31 +4572,31 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   gosub *add_subr_to_env  ; mod
   mov %arg0, %global_env
   mov %arg1, lf_gt
-  mov $sarg0, "＞"
+  mov $sarg0, ">"
   gosub *add_subr_to_env  ; gt
   mov %arg0, %global_env
   mov %arg1, lf_ge
-  mov $sarg0, "＞＝"
+  mov $sarg0, ">="
   gosub *add_subr_to_env  ; ge
   mov %arg0, %global_env
   mov %arg1, lf_ls
-  mov $sarg0, "＜"
+  mov $sarg0, "<"
   gosub *add_subr_to_env  ; ls
   mov %arg0, %global_env
   mov %arg1, lf_le
-  mov $sarg0, "＜＝"
+  mov $sarg0, "<="
   gosub *add_subr_to_env  ; le
   mov %arg0, %global_env
   mov %arg1, lf_eq
-  mov $sarg0, "＝"
+  mov $sarg0, "="
   gosub *add_subr_to_env  ; = ('=' is the same as 'eq?')
   mov %arg0, %global_env
   mov %arg1, lf_set_car
-  mov $sarg0, "set-car！"
+  mov $sarg0, "set-car!"
   gosub *add_subr_to_env  ; set-car!
   mov %arg0, %global_env
   mov %arg1, lf_set_cdr
-  mov $sarg0, "set-cdr！"
+  mov $sarg0, "set-cdr!"
   gosub *add_subr_to_env  ; set-cdr!
   mov %arg0, %global_env
   mov %arg1, lf_eval
@@ -4715,7 +4650,6 @@ if %gc_silent >= 1 goto *symbol_gc_sl2
   mov %arg1, %global_env
   gosub *eval_form
   return
-
 
 ;;;;;;;;;;;;;;;;;;;;
 *start
